@@ -7,6 +7,11 @@ class SignupsController < ApplicationController
     @signups = Signup.all
   end
 
+  def available_signups
+    @marshall_shifts = Marshallshift.shifts_available
+    @registration_shifts = RegistrationShift.shifts_available
+  end
+
   # GET /signups/1
   # GET /signups/1.json
   def show
@@ -28,7 +33,7 @@ class SignupsController < ApplicationController
 
     respond_to do |format|
       if @signup.save
-        format.html { redirect_to @signup, notice: 'Signup was successfully created.' }
+        format.html { redirect_to @signup, notice: 'Successfully signed up, thanks!' }
         format.json { render :show, status: :created, location: @signup }
       else
         format.html { render :new }
