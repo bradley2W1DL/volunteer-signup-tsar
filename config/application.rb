@@ -31,5 +31,8 @@ module VolunteerSignupTsar
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Allow static assets to be served on heroku production
+    config.serve_static_assets = true
   end
 end

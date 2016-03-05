@@ -64,3 +64,5 @@ gem 'omniauth'
 gem 'sprockets-rails', '2.3.3'
 
 gem 'simple_form'
+
+gem 'rails_12factor', group: :production
