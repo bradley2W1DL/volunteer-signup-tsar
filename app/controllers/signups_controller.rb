@@ -5,6 +5,8 @@ class SignupsController < ApplicationController
   # GET /signups.json
   def index
     @signups = Signup.all
+    @shifts = Shift.all
+    @new_signup = Signup.new
   end
 
   def available_signups
@@ -33,7 +35,8 @@ class SignupsController < ApplicationController
 
     respond_to do |format|
       if @signup.save
-        format.html { redirect_to @signup, notice: 'Successfully signed up, thanks!' }
+        # redirect to current_page? given that there might be different views
+        format.html { redirect_to root_path, notice: 'Successfully signed up, thanks!' }
         format.json { render :show, status: :created, location: @signup }
       else
         format.html { render :new }
@@ -74,6 +77,6 @@ class SignupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def signup_params
-      params.require(:signup).permit(:name, :email, :phone_number)
+      params.require(:signup).permit(:name, :email, :phone_number, :shift_id)
     end
 end

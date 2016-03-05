@@ -62,3 +62,5 @@ gem 'omniauth'
 # funky error with sprockets that wasn't allowing me to reference assets/images
 # turning back the version for now (3.0.0 was breaking)
 gem 'sprockets-rails', '2.3.3'
+
+gem 'simple_form'

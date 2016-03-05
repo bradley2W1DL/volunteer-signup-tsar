@@ -5,4 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :roles
+
+  def admin?
+    self.roles.include?(Role.where(name: 'admin').first)
+  end
 end

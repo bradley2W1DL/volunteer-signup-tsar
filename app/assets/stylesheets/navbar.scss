@@ -1,6 +1,13 @@
+
 .navbar {
   img {
     height: 80px;
     padding: 10px 15px;
+  }
+
+  li#user {
+    /* color: $navbar-default-link-color; */
+    color: #777;
+    padding-top: 35px;
   }
 }

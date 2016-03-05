@@ -1,3 +1,3 @@
 class Signup < ActiveRecord::Base
-  belongs_to :marshall_shift
+  belongs_to :shift
 end
