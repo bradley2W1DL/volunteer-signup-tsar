@@ -18,15 +18,14 @@
           <td><%= signup.phone_number %></td>
           <td><%= signup.email %></td>
           <td>
-            <%= signup.try(:team_affiliation) || 'N/A' %>
-            <%= link_to '', signup_path, data: { toggle: 'modal', target: '#edit-email-modal'} %>
+            <%= signup.team_affiliation || 'none' %>
+            <button class="fa fa-envelope pull-right"  data-toggle="modal" data-target="#edit-signup-modal"></button>
           </td>
-          <%= link_to "Messages", conversations_path, data: { toggle: "modal", target: "#ajax-modal" } %>
 
           <% if current_user.try(:admin?) %>
             <td style="width: 5%;">
-              <%= link_to 'edit', edit_signup_path(signup) %>
-              <%= link_to 'destroy', signup, method: :delete, data: { confirm: 'Are you sure?' } %>
+              <%= link_to 'Edit', edit_signup_path(signup) %>
+              <%= link_to 'Delete', signup, method: :delete, data: { confirm: 'Are you sure?' } %>
             </td>
           <% end %>
         </tr>
@@ -48,13 +47,15 @@
           <%= form_for @new_signup do |f| %>
               <%= f.hidden_field :shift_id, value: shift.id %>
               <td><%= shift.required_number %></td>
-              <td><%= f.text_field :name %></td>
-              <td><%= f.text_field :phone_number %></td>
-              <td><%= f.email_field :email %></td>
-              <td><input type="text" placeholder="team affiliation?">&nbsp;<%= f.submit 'Sign Up'%></td>
+              <td><%= f.text_field :name, placeholder: 'name' %></td>
+              <td><%= f.text_field :phone_number, placeholder: 'phone: 970-555-1000' %></td>
+              <td><%= f.email_field :email, placeholder: 'email address' %></td>
+              <td><%= f.text_field :team_affiliation, placeholder: 'team affiliation' %>&nbsp;<%= f.submit 'Sign Up'%></td>
           <% end %>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
+
+<%= render 'shared/edit_email_modal' %>

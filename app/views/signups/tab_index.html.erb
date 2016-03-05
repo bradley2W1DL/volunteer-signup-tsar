@@ -1,0 +1,39 @@
+<!-- assume you recieve @shifts and @signups from controller -->
+<div>
+  <h1>Volunteer Signups</h1>
+  <p>*You must sign up for at least two volunteer shifts. See the <%= link_to 'race flyer' %> if you'd like to race and avoid conflicts</p>
+</div>
+<br>
+
+<div>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <% @shifts.each do |shift| %>
+      <li role="presentation" class="tab">
+        <a href=<%= "#shift_#{shift.id}" %> aria-controls=<%= "#shift_#{shift.id}" %> role="tab" data-toggle="tab">
+          <%= shift.name %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <% @shifts.each do |shift| %>
+      <div role="tabpanel" class="tab-pane fade" id=<%= "shift_#{shift.id}" %> >
+        <h2><%= "#{shift.name} -- #{shift.shift_time}" %></h2>
+        <% if current_user.try(:admin?) %>
+            <p class="admin-info text-muted"><%= "shift_type: #{shift.shift_type} -- id: #{shift.id}"%></p>
+        <% end %>
+        <%= render 'shared/shift_table', shift: shift %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+    $('li.tab').first().addClass('active');
+    $('.tab-pane').first().addClass('in active');
+  });
+</script>

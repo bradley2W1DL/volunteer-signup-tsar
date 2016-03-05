@@ -7,6 +7,7 @@ class SignupsController < ApplicationController
     @signups = Signup.all
     @shifts = Shift.all
     @new_signup = Signup.new
+    render 'tab_index'
   end
 
   def available_signups
@@ -77,6 +78,6 @@ class SignupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def signup_params
-      params.require(:signup).permit(:name, :email, :phone_number, :shift_id)
+      params.require(:signup).permit(:name, :email, :phone_number, :shift_id, :team_affiliation)
     end
 end
