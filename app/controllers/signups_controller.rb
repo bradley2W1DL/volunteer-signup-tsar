@@ -1,13 +1,14 @@
 class SignupsController < ApplicationController
   before_action :set_signup, only: [:show, :edit, :update, :destroy]
+  before_action :new_signup, only: [:index, :show, :new]
+  respond_to :html, :js
 
   # GET /signups
   # GET /signups.json
   def index
     @signups = Signup.all
     @shifts = Shift.all
-    @new_signup = Signup.new
-    render 'tab_index'
+    @marshall_shifts = Shift.where(shift_type: 'marshall')
   end
 
   def available_signups
@@ -22,7 +23,6 @@ class SignupsController < ApplicationController
 
   # GET /signups/new
   def new
-    @signup = Signup.new
   end
 
   # GET /signups/1/edit
@@ -71,6 +71,10 @@ class SignupsController < ApplicationController
   end
 
   private
+    def new_signup
+      @new_signup = Signup.new
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_signup
       @signup = Signup.find(params[:id])

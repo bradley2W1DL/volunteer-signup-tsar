@@ -1,17 +1,23 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Volunteer Signup Shifts</h1>
+
+<%= link_to 'All Shifts', fetch_shifts_path(shift_type: 'all'),
+            remote: true, class: 'btn btn-default shift-button active', id: 'all-tab' %>
+<%= link_to 'All Available', fetch_shifts_path(shift_type: 'all_available'),
+            remote: true, class: 'btn btn-default shift-button', id: 'all_available-tab' %>
+<%= link_to 'Before Race-day / Race-day Setup', fetch_shifts_path(shift_type: 'setup'),
+            remote: true, class: 'btn btn-default shift-button', id: 'setup-tab' %>
+<%= link_to 'Marshall', fetch_shifts_path(shift_type: 'marshall'),
+            remote: true, class: 'btn btn-default shift-button', id: 'marshall-tab' %>
+<%= link_to 'Registration', fetch_shifts_path(shift_type: 'registration'),
+            remote: true, class: 'btn btn-default shift-button', id: 'registration-tab' %>
+<%= link_to 'Breakdown / Day After', fetch_shifts_path(shift_type: 'breakdown'),
+            remote: true, class: 'btn btn-default shift-button', id: 'breakdown-tab' %>
+
 <hr>
-
-<% @shifts.each do |shift| %>
-  <div class="row">
-    <h3><%= shift.name %> -- <%= shift.shift_time %></h3>
-    <% if current_user.try(:admin?) %>
-      <p class="admin-info text-muted"><%= "shift_type: #{shift.shift_type} -- id: #{shift.id}"%></p>
-    <% end %>
-    <%= render 'shared/shift_table', shift: shift %>
-  </div>
-  <hr>
-<% end %>
-
+<div id="shifts-table">
+  <%= render 'shared/shift_table', shifts: @shifts %>
+</div>
+<%= render 'shared/edit_email_modal' %>
 <br>
