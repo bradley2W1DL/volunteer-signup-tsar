@@ -1,17 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Volunteer Signup Shifts</h1>
+<button class="btn btn-default  shift-buttons active">All Available</button>
+<button class="btn btn-default shift-buttons">Before Race-day / Setup</button>
+<%= link_to 'Marshall', fetch_shifts_path(shift_type: 'marshall'), remote: true, class: 'btn btn-default shift-buttons' %>
+<button class="btn btn-default shift-buttons">Registration</button>
+<button class="btn btn-default shift-buttons">Breakdown / Day After</button>
 <hr>
-
-<% @shifts.each do |shift| %>
-  <div class="row">
-    <h3><%= shift.name %> -- <%= shift.shift_time %></h3>
-    <% if current_user.try(:admin?) %>
-      <p class="admin-info text-muted"><%= "shift_type: #{shift.shift_type} -- id: #{shift.id}"%></p>
-    <% end %>
-    <%= render 'shared/shift_table', shift: shift %>
-  </div>
-  <hr>
-<% end %>
-
+<div id="shifts-table">
+  <%= render 'shared/shift_table', shifts: @shifts %>
+</div>
+<%= render 'shared/edit_email_modal' %>
 <br>

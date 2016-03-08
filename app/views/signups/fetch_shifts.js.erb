@@ -1,0 +1,7 @@
+
+$('#shifts-table').html("<%= j (render 'shared/shift_table', shifts: @shifts) %>");
+// make the tab associated with these shifts active
+$('.shift-buttons').removeClass('active');
+$("#<%= @shift_type %>-tab").addClass('active');
+
+console.log(<%= @shift_type %>);
