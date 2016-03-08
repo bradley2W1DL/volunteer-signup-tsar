@@ -1,6 +1,6 @@
 class SignupsController < ApplicationController
   before_action :set_signup, only: [:show, :edit, :update, :destroy]
-  before_action :new_signup, only: [:index, :show, :fetch_shifts, :new]
+  before_action :new_signup, only: [:index, :show, :new]
   respond_to :html, :js
 
   # GET /signups
@@ -14,11 +14,6 @@ class SignupsController < ApplicationController
   def available_signups
     @marshall_shifts = Marshallshift.shifts_available
     @registration_shifts = RegistrationShift.shifts_available
-  end
-
-  def fetch_shifts
-    @shift_type = params[:shift_type]
-    @shifts = Shift.where(shift_type: @shift_type)
   end
 
   # GET /signups/1
