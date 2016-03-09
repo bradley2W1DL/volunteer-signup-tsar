@@ -1,14 +1,19 @@
 class SignupsController < ApplicationController
   before_action :set_signup, only: [:show, :edit, :update, :destroy]
-  before_action :new_signup, only: [:index, :show, :new]
+  before_action :new_signup, only: [:index, :show, :new, :create]
   respond_to :html, :js
 
   # GET /signups
   # GET /signups.json
   def index
-    @signups = Signup.all
-    @shifts = Shift.all
-    @marshall_shifts = Shift.where(shift_type: 'marshall')
+    if params[:shift_type]
+      @shift_type = params[:shift_type].to_s
+      @shifts = Shift.where(shift_type: @shift_type)
+    else
+      @shifts = Shift.all
+      @shift_type = 'all'
+    end
+    # @signups = Signup.all
   end
 
   def available_signups
@@ -32,11 +37,14 @@ class SignupsController < ApplicationController
   # POST /signups.json
   def create
     @signup = Signup.new(signup_params)
+    @shift_type = Shift.find(@signup.shift_id).shift_type
+    @shifts = Shift.where(shift_type: @shift_type)
 
     respond_to do |format|
       if @signup.save
         # redirect to current_page? given that there might be different views
-        format.html { redirect_to root_path, notice: 'Successfully signed up, thanks!' }
+        format.html { render :index }
+        # format.html { redirect_to root_path, notice: 'Successfully signed up, thanks!' }
         # format.json { render :show, status: :created, location: @signup }
         format.js
       else

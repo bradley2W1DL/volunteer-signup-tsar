@@ -1,5 +1,4 @@
 class ShiftsController < ApplicationController
-  respond_to :html, :js
 
   def fetch_shifts
     @new_signup = Signup.new
@@ -8,6 +7,10 @@ class ShiftsController < ApplicationController
       @shifts = Shift.all
     else
       @shifts = Shift.where(shift_type: @shift_type)
+    end
+    respond_to do |format|
+      format.html { render 'signups/index'}
+      format.js
     end
   end
 end
