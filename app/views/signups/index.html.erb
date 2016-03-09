@@ -3,17 +3,17 @@
 <h1>Volunteer Signup Shifts</h1>
 
 <%= link_to 'All Shifts', fetch_shifts_path(shift_type: 'all'),
-            remote: true, class: 'btn btn-default shift-button active', id: 'all-tab' %>
+            :'data-no-turbolink' => true, class: 'btn btn-default shift-button active', id: 'all-tab' %>
 <%= link_to 'All Available', fetch_shifts_path(shift_type: 'all_available'),
-            remote: true, class: 'btn btn-default shift-button', id: 'all_available-tab' %>
+            :'data-no-turbolink' => true, class: 'btn btn-default shift-button', id: 'all_available-tab' %>
 <%= link_to 'Before Race-day / Race-day Setup', fetch_shifts_path(shift_type: 'setup'),
-            remote: true, class: 'btn btn-default shift-button', id: 'setup-tab' %>
+            :'data-no-turbolink' => true, class: 'btn btn-default shift-button', id: 'setup-tab' %>
 <%= link_to 'Marshall', fetch_shifts_path(shift_type: 'marshall'),
-            remote: true, class: 'btn btn-default shift-button', id: 'marshall-tab' %>
+            :'data-no-turbolink' => true, class: 'btn btn-default shift-button', id: 'marshall-tab' %>
 <%= link_to 'Registration', fetch_shifts_path(shift_type: 'registration'),
-            remote: true, class: 'btn btn-default shift-button', id: 'registration-tab' %>
+            :'data-no-turbolink' => true, class: 'btn btn-default shift-button', id: 'registration-tab' %>
 <%= link_to 'Breakdown / Day After', fetch_shifts_path(shift_type: 'breakdown'),
-            remote: true, class: 'btn btn-default shift-button', id: 'breakdown-tab' %>
+            :'data-no-turbolink' => true, class: 'btn btn-default shift-button', id: 'breakdown-tab' %>
 
 <hr>
 <div id="shifts-table">
@@ -21,3 +21,10 @@
 </div>
 <%= render 'shared/edit_email_modal' %>
 <br>
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+    $('.shift-button').removeClass('active');
+    $('#<%= @shift_type %>-tab').addClass('active');
+  });
+</script>
