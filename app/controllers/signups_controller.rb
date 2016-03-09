@@ -12,8 +12,7 @@ class SignupsController < ApplicationController
   end
 
   def available_signups
-    @marshall_shifts = Marshallshift.shifts_available
-    @registration_shifts = RegistrationShift.shifts_available
+
   end
 
   # GET /signups/1
@@ -38,10 +37,12 @@ class SignupsController < ApplicationController
       if @signup.save
         # redirect to current_page? given that there might be different views
         format.html { redirect_to root_path, notice: 'Successfully signed up, thanks!' }
-        format.json { render :show, status: :created, location: @signup }
+        # format.json { render :show, status: :created, location: @signup }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @signup.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end

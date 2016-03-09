@@ -39,8 +39,7 @@
           <% end %>
           <% if shift.available_spots? %>
             <% (shift.spots_remaining - 1).times do |i| %>
-              <!-- display empty table rows -->
-                <% num = shift.signups.count + (i + 1) %>
+              <% num = shift.signups.count + (i + 1) %>
               <tr>
                 <td><%= num %></td>
                 <td></td>
@@ -49,7 +48,7 @@
                 <td></td>
               </tr>
             <% end %>
-            <!-- inline form for signups -->
+            <!-- inline form for signups with new_signup passed as a local variable -->
             <tr>
               <%= form_for @new_signup do |f| %>
                   <%= f.hidden_field :shift_id, value: shift.id %>
@@ -57,7 +56,7 @@
                   <td><%= f.text_field :name, placeholder: 'name' %></td>
                   <td><%= f.text_field :phone_number, placeholder: 'phone: 970-555-1000' %></td>
                   <td><%= f.email_field :email, placeholder: 'email address' %></td>
-                  <td><%= f.text_field :team_affiliation, placeholder: 'team affiliation' %>&nbsp;<%= f.submit 'Sign Up'%></td>
+                  <td><%= f.text_field :team_affiliation, placeholder: 'team affiliation' %>&nbsp;<%= f.submit 'Sign Up' %></td>
               <% end %>
             </tr>
           <% end %>
