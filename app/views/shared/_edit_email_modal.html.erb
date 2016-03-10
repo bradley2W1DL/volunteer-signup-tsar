@@ -4,19 +4,33 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h5 class="modal-title" id="editEmailModal">Send an Email to Change your Signup</h5>
+        <h5 class="modal-title" id="editEmailModal">Email the volunteer coordinator to change your signup</h5>
       </div>
       <div class="modal-body">
-        <h6>To make change to your signup please send an email</h6>
-        <p>And we'll think about it!</p>
 
-        <input id='name-edit' type="text" placeholder="name">
-        <input type="text-area">
+        <p>
+          In order to keep track of things we need to be aware of any changes, issues, or conflicts that come up.<br>
+          To this end, only the volunteer coordinator can make changes to the sign-up sheet.  So if you need to make a change
+          just drop us a line with this form.  Thanks!
+        </p>
+        <div class="edit-modal-form">
+          <%= form_tag({controller: 'signups', action: 'edit_request'}, method: :post) do %>
+            <%= hidden_field_tag(:signup_id) %>
+            <%= label_tag :name, 'Name:', id: 'name-label' %>
+            <%= text_field_tag(:name) %>
+              <br/>
+            <div class="modal-text-area">
+              <%= label_tag :message, 'Message:' %><br>
+              <%= text_area_tag(:message, '', size: '50x10') %>
+            </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
         <!-- Have the button post to a 'mailer' endpoint which grabs param values-->
-        <button type="button" class="btn btn-primary">Send Message</button>
+          <%= submit_tag 'Send Message', class: 'btn btn-primary' %>
+          <% end %>
       </div>
     </div>
   </div>
