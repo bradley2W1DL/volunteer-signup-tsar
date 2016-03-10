@@ -43,8 +43,7 @@ class SignupsController < ApplicationController
     respond_to do |format|
       if @signup.save
         # redirect to current_page? given that there might be different views
-        format.html { render :index }
-        # format.html { redirect_to root_path, notice: 'Successfully signed up, thanks!' }
+        format.html { redirect_to :back, notice: 'Successfully signed up' }
         # format.json { render :show, status: :created, location: @signup }
         format.js
       else

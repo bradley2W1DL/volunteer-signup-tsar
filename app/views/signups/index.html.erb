@@ -1,18 +1,16 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Volunteer Signup Shifts</h1>
 
-<%= link_to 'All Shifts', fetch_shifts_path(shift_type: 'all'),
+<%= link_to 'All Shifts', signups_path,
             :'data-no-turbolink' => true, class: 'btn btn-default shift-button active', id: 'all-tab' %>
-<%= link_to 'All Available', fetch_shifts_path(shift_type: 'all_available'),
+<%= link_to 'All Available', signups_path(shift_type: 'all_available'),
             :'data-no-turbolink' => true, class: 'btn btn-default shift-button', id: 'all_available-tab' %>
-<%= link_to 'Before Race-day / Race-day Setup', fetch_shifts_path(shift_type: 'setup'),
+<%= link_to 'Before Race-day / Race-day Setup', signups_path(shift_type: 'setup'),
             :'data-no-turbolink' => true, class: 'btn btn-default shift-button', id: 'setup-tab' %>
-<%= link_to 'Marshall', fetch_shifts_path(shift_type: 'marshall'),
+<%= link_to 'Marshall', signups_path(shift_type: 'marshall'),
             :'data-no-turbolink' => true, class: 'btn btn-default shift-button', id: 'marshall-tab' %>
-<%= link_to 'Registration', fetch_shifts_path(shift_type: 'registration'),
+<%= link_to 'Registration', signups_path(shift_type: 'registration'),
             :'data-no-turbolink' => true, class: 'btn btn-default shift-button', id: 'registration-tab' %>
-<%= link_to 'Breakdown / Day After', fetch_shifts_path(shift_type: 'breakdown'),
+<%= link_to 'Breakdown / Day After', signups_path(shift_type: 'breakdown'),
             :'data-no-turbolink' => true, class: 'btn btn-default shift-button', id: 'breakdown-tab' %>
 
 <hr>
@@ -21,10 +19,15 @@
 </div>
 <%= render 'shared/edit_email_modal' %>
 <br>
-
+<%= console %>
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
     $('.shift-button').removeClass('active');
     $('#<%= @shift_type %>-tab').addClass('active');
+
+    <% if flash[:shift_id] %>
+      var position = $(<%= escape_javascript "#shift-#{flash[:shift_id]}" %>).position();
+      $(window).scrollTop(position.top);
+    <% end %>
   });
 </script>
