@@ -26,7 +26,8 @@
               <td><%= signup.email %></td>
               <td>
                 <%= signup.team_affiliation || 'none' %>
-                <button class="fa fa-envelope pull-right"  data-toggle="modal" data-signup-id="<%= signup.id %>" data-target="#edit-signup-modal"></button>
+                <button class="btn btn-default btn-sm fa fa-envelope pull-right"  data-toggle="modal"
+                        data-signup-id="<%= signup.id %>" data-target="#edit-signup-modal"></button>
               </td>
 
               <% if current_user.try(:admin?) %>
@@ -56,7 +57,10 @@
                   <td><%= f.text_field :name, placeholder: 'name' %></td>
                   <td><%= f.text_field :phone_number, placeholder: 'phone: 970-555-1000' %></td>
                   <td><%= f.email_field :email, placeholder: 'email address' %></td>
-                  <td><%= f.text_field :team_affiliation, placeholder: 'team affiliation' %>&nbsp;<%= f.submit 'Sign Up' %></td>
+                  <td>
+                    <%= f.text_field :team_affiliation, placeholder: 'team affiliation' %>
+                    &nbsp;<%= f.submit 'Sign Up', class: 'btn btn-default' %>
+                  </td>
               <% end %>
             </tr>
           <% end %>

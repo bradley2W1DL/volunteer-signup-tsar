@@ -8,7 +8,11 @@ class SignupsController < ApplicationController
   def index
     if params[:shift_type]
       @shift_type = params[:shift_type].to_s
-      @shifts = Shift.where(shift_type: @shift_type)
+      if params[:shift_type] == 'all_available'
+        @shifts = Shift.where('required_number < ?', 20) # needs to return if less than the number of signups
+      else
+        @shifts = Shift.where(shift_type: @shift_type)
+      end
     else
       @shifts = Shift.all
       @shift_type = 'all'
