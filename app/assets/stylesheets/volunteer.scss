@@ -29,3 +29,33 @@ p.admin-info {
   }
 }
 
+/* Contact Page */
+
+h3#contact {
+  margin-left: 50px;
+}
+
+.contact-form {
+  width: 40%;
+  border: 1px solid #999999;
+  border-radius: 3px;
+  margin-left: 50px;
+  .contact-form-header {
+    border-bottom: 1px solid #999;
+    height: 100%;
+  }
+  input, textarea {
+    margin: 5px 10px;
+    width: 95%
+  }
+  input#name {
+    margin-top: 20px;
+  }
+  input#commit {
+    margin-bottom: 20px;
+  }
+  h4 {
+    margin: 10px;
+  }
+}
+

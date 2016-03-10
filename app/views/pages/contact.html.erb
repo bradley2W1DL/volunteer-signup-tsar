@@ -1,3 +1,15 @@
-<h3>Contact</h3>
+<h3 id="contact">Contact</h3>
 <hr>
-<p>TODO: create a general mailer to be sent to Jason, myself, and Mike</p>
+<div class="contact-form">
+  <div class="contact-form-header">
+    <h4>If you have any general questions, let us know.</h4>
+  </div>
+  <%= form_tag do %>
+      <%= text_field_tag :name, nil, placeholder: 'name' %>
+    <br>
+      <%= email_field_tag :email, nil, placeholder: 'email' %>
+    <br>
+      <%= text_area_tag :message, nil, size: '50x10' %>
+      <%= submit_tag 'Send Message', class: 'btn btn-default' %>
+  <% end %>
+</div>
