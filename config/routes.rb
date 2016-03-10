@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   resources :signups
   resources :shifts
 
+  post 'edit_request' => 'signups#edit_request'
   get 'contact' => 'pages#contact'
 end

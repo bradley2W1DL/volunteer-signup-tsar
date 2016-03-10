@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<!-- todo add premailer or roadie to give the email some pizzaz, or just inline the styles -->
+<body>
+  <h2>Volunteer Tsar</h2>
+  <hr>
+  <%#= image_tag 'volunteer_tsar.png', class: 'volunteer-tsar' %>
+  <div class="email-container">
+    <p>In regards to <%= @signup.name %>'s signup for the <%= "#{@shift.name} - #{@shift.shift_time}" %></p>
+    <h4><%= @name %> writes:</h4>
+    <p id="message" style="margin-left: 10px; padding: 10px; border: 1px solid #999; border-radius: 5px;">
+      <%= @message %>
+    </p>
+    <hr>
+    <p><small>respond to <%= @signup.email %></small></p>
+  </div>
+</body>
+</html>

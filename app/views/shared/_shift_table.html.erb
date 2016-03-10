@@ -26,7 +26,7 @@
               <td><%= signup.email %></td>
               <td>
                 <%= signup.team_affiliation || 'none' %>
-                <button class="fa fa-envelope pull-right"  data-toggle="modal" data-target="#edit-signup-modal"></button>
+                <button class="fa fa-envelope pull-right"  data-toggle="modal" data-signup-id="<%= signup.id %>" data-target="#edit-signup-modal"></button>
               </td>
 
               <% if current_user.try(:admin?) %>

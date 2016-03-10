@@ -19,7 +19,7 @@
 </div>
 <%= render 'shared/edit_email_modal' %>
 <br>
-<%= console %>
+
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
     $('.shift-button').removeClass('active');
@@ -29,5 +29,11 @@
       var position = $(<%= escape_javascript "#shift-#{flash[:shift_id]}" %>).position();
       $(window).scrollTop(position.top);
     <% end %>
+  });
+
+  // insert the signup_id into a hidden field in the modal
+  $('#edit-signup-modal').on('show.bs.modal', function(e) {
+    var signupId = $(e.relatedTarget).data('signup-id');
+    $(e.currentTarget).find('input[name="signup_id"]').val(signupId);
   });
 </script>

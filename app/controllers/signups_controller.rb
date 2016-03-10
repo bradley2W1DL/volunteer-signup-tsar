@@ -16,8 +16,16 @@ class SignupsController < ApplicationController
     # @signups = Signup.all
   end
 
-  def available_signups
-
+  def edit_request
+    signup = Signup.find(params[:signup_id])
+    request = { name: params[:name], message: params[:message] }
+    if VolunteerMailer.edit_request_email(signup, request).deliver_now
+      flash[:notice] = 'Message Sent, we\'ll get back to you as soon as we can'
+      Message.create(sender_name: request[:name], sender_email: signup.email, message: request[:message], signup_id: signup.id)
+    else
+      flash[:error] = 'an error occurred when trying to send message'
+    end
+    redirect_to :back
   end
 
   # GET /signups/1

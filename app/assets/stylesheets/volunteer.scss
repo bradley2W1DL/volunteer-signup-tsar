@@ -4,3 +4,28 @@ p.admin-info {
   float: right;
   display: inline;
 }
+
+/* Edit Signup Modal Styles */
+
+.edit-modal-form {
+  border: 1px solid #999999;
+  border-radius: 3px;
+  padding: 10px;
+  margin: 15px;
+  label#name-label {
+    margin-right: 5px
+  }
+  input {
+    width: 50%;
+  }
+  .modal-text-area {
+    margin-top: 20px;
+    label {
+      margin-bottom: 5px;
+    }
+    textarea {
+      width: 100%
+    }
+  }
+}
+
