@@ -14,6 +14,17 @@
             :'data-no-turbolink' => true, class: 'btn btn-default shift-button', id: 'breakdown-tab' %>
 
 <hr>
+<% if @signup && @signup.errors.any? %>
+  <div class="alert alert-danger alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4><i class="fa fa-exclaimation-triangle fa-2x"></i>Sign up unsuccessful becuase...</h4>
+    <% @signup.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+    <% end %>
+  </div>
+
+<% end %>
+
 <div id="shifts-table">
   <%= render 'shared/shift_table', shifts: @shifts %>
 </div>

@@ -51,7 +51,7 @@
             <% end %>
             <!-- inline form for signups with new_signup passed as a local variable -->
             <tr>
-              <%= form_for @new_signup do |f| %>
+              <%= form_for @new_signup, validate: true do |f| %>
                   <%= f.hidden_field :shift_id, value: shift.id %>
                   <td><%= shift.required_number %></td>
                   <td><%= f.text_field :name, placeholder: 'name' %></td>
