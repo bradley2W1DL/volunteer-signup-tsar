@@ -59,7 +59,7 @@ class SignupsController < ApplicationController
         # format.json { render :show, status: :created, location: @signup }
         format.js
       else
-        format.html { render :new }
+        format.html { render :index }
         format.json { render json: @signup.errors, status: :unprocessable_entity }
         format.js
       end
