@@ -9,7 +9,7 @@ class SignupsController < ApplicationController
     if params[:shift_type]
       @shift_type = params[:shift_type].to_s
       if params[:shift_type] == 'all_available'
-        @shifts = Shift.where('required_number < ?', 20) # needs to return if less than the number of signups
+        @shifts = Shift.find(Shift.available_shift_ids)
       else
         @shifts = Shift.where(shift_type: @shift_type)
       end
@@ -17,7 +17,6 @@ class SignupsController < ApplicationController
       @shifts = Shift.all
       @shift_type = 'all'
     end
-    # @signups = Signup.all
   end
 
   def edit_request
@@ -50,12 +49,13 @@ class SignupsController < ApplicationController
   def create
     @signup = Signup.new(signup_params)
     @shift_type = Shift.find(@signup.shift_id).shift_type
-    @shifts = Shift.where(shift_type: @shift_type)
+    @shifts = Array(Shift.find(@signup.shift_id))
 
     respond_to do |format|
       if @signup.save
-        # redirect to current_page? given that there might be different views
-        format.html { redirect_to :back, notice: 'Successfully signed up' }
+        flash.now[:notice] = 'Successfully signed up'
+        format.html { render :index }
+        # format.html { redirect_to :back, notice: 'Successfully signed up' }
         # format.json { render :show, status: :created, location: @signup }
         format.js
       else

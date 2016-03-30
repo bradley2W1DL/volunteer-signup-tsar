@@ -9,4 +9,14 @@ class Shift < ActiveRecord::Base
   def spots_remaining
     self.required_number - self.signups.count
   end
+
+  def self.available_shift_ids
+    # returns an array of ids for shifts with spots left to fill
+    ids = []
+    all.each do |shift|
+      ids << shift.id if shift.spots_remaining > 0
+    end
+    ids
+  end
+
 end
