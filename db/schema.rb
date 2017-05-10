@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20170510041817) do
     t.string   "shift_type"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.integer  "order"
+    t.integer  "display_order"
   end
 
   create_table "signups", force: :cascade do |t|

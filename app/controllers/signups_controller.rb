@@ -9,12 +9,12 @@ class SignupsController < ApplicationController
     if params[:shift_type]
       @shift_type = params[:shift_type].to_s
       if params[:shift_type] == 'all_available'
-        @shifts = Shift.find(Shift.available_shift_ids)
+        @shifts = Shift.where(id: Shift.available_shift_ids).order(:display_order)
       else
-        @shifts = Shift.where(shift_type: @shift_type)
+        @shifts = Shift.where(shift_type: @shift_type).order(:display_order)
       end
     else
-      @shifts = Shift.all
+      @shifts = Shift.all.order(:display_order)
       @shift_type = 'all'
     end
   end
@@ -23,7 +23,7 @@ class SignupsController < ApplicationController
     signup = Signup.find(params[:signup_id])
     request = { name: params[:name], message: params[:message] }
     if VolunteerMailer.edit_request_email(signup, request).deliver_now
-      flash[:notice] = 'Message Sent, we\'ll get back to you as soon as we can'
+      flash[:notice] = 'Message Sent, I\'ll get back to you as soon as I can'
       Message.create(sender_name: request[:name], sender_email: signup.email, message: request[:message], signup_id: signup.id)
     else
       flash[:error] = 'an error occurred when trying to send message'

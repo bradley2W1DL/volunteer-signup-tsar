@@ -17,8 +17,9 @@ namespace :tsar do
       12 => 11
     }
     Shift.all.each do |shift|
-      shift.update(order: order_hash[shift.id])
+      shift.update(display_order: order_hash[shift.id])
     end
+    puts '[]===== it has been done =======//'
   end
-  
+
 end
